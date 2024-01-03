@@ -76,31 +76,40 @@ include(__DIR__ . "/partials/head.php");
 
 <script>
 	$(function() {
-		const url = "./php/controller/admin/employeeController.php";
+		// Initial load of table data
+		refreshTable();
 
-		$.ajax({
-			type: "GET",
-			url: url,
-			success: function(res) {
-				const data = JSON.parse(res);
+		// Function to refresh the table
+		function refreshTable() {
+			const url = "./php/controller/admin/employeeController.php";
 
-				if (data.success) {
-					localStorage.setItem("employees", JSON.stringify(data.data));
-					data.data.map((data) => {
-						$("#table-body").append(generateRowMarkup(data));
-					});
-				} else {
-					$("#table-body").append(`
-          <tr>
-            <td colspan="6" class="text-center">
-              <p class="card-text">No Registered Employees!</p>
-            </td>
-          </tr>
-        `);
-				}
-			},
-			error: handleError
-		});
+			$.ajax({
+				type: "GET",
+				url: url,
+				success: function(res) {
+					const data = JSON.parse(res);
+
+					// Clear existing table rows
+					$("#table-body").empty();
+
+					if (data.success) {
+						localStorage.setItem("employees", JSON.stringify(data.data));
+						data.data.map((data) => {
+							$("#table-body").append(generateRowMarkup(data));
+						});
+					} else {
+						$("#table-body").append(`
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <p class="card-text">No Registered Employees!</p>
+                            </td>
+                        </tr>
+                    `);
+					}
+				},
+				error: handleError
+			});
+		}
 
 		const generateRowMarkup = (data) => {
 			const fullname = data.firstname + " " + data.middlename.charAt(0) + ". " + data.lastname;
@@ -116,26 +125,27 @@ include(__DIR__ . "/partials/head.php");
 			const registeredDate = formatDateTime(data.created_at);
 
 			return `<tr class="align-middle border-dark">
-						<td>${fullname}</td>
-						<td>${data.contact_number}</td>
-						<td>${data.email}</td>
-						<td>${address}</td>
-						<td>${registeredDate}</td>
-						<td class="d-flex align-items-center">
-							<a href="edit_employee.php?id=${data.id}" class="mr-2">
-								<i class="fas fa-edit"></i>
-							</a>
-							<form class="delete-form">
-								<input type="hidden" name="_method" value="DELETE">
-								<input type="hidden" name="id" value="${data.id}">
-								<button class="btn delete-btn" type="submit">
-									<i class="fas fa-trash text-danger"></i>
-								</button>
-							</form>
-						</td>
-					</tr>`;
+                    <td>${fullname}</td>
+                    <td>${data.contact_number}</td>
+                    <td>${data.email}</td>
+                    <td>${address}</td>
+                    <td>${registeredDate}</td>
+                    <td class="d-flex align-items-center">
+                        <a href="edit_employee.php?id=${data.id}" class="mr-2">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form class="delete-form">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="id" value="${data.id}">
+                            <button class="btn delete-btn" type="submit">
+                                <i class="fas fa-trash text-danger"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>`;
 		};
 
+		// Event listener for the delete form
 		$(document).on("submit", ".delete-form", function(e) {
 			e.preventDefault();
 
@@ -160,31 +170,29 @@ include(__DIR__ . "/partials/head.php");
 						type: "POST",
 						url: url,
 						data: data,
-						success: handleSuccess,
+						success: function(res) {
+							// Refresh the table after successful operation
+							refreshTable();
+							handleSuccess(res);
+						},
 						error: handleError,
 					});
 				}
 			});
-
-
 		});
 
 		// Success handler
 		function handleSuccess(res) {
 			const data = JSON.parse(res);
-			console.log(data);
 
 			if (data.success == true) {
-				window.location.href = "employee.php";
-				// 	setTimeout(() => {
-
-				// }, 3000);
-
+				showToast("success", data.message);
 			} else if (data.success == false) {
 				showToast("error", data.message);
 			}
 		}
-		// Error Handler
+
+		// Your existing error handler
 		function handleError(err) {
 			console.log(err);
 		}
@@ -194,10 +202,6 @@ include(__DIR__ . "/partials/head.php");
 				icon: icon,
 				title: title,
 			});
-		}
-		// Error Handler
-		function handleError(err) {
-			console.log(err);
 		}
 
 		//format date time
