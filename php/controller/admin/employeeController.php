@@ -36,7 +36,7 @@ switch ($requestMethod) {
 }
 function fetchAllEmployee()
 {
-	$results = User::read();
+	$results = User::find(EMPLOYEE_ROLE, "role", true);
 
 	if (!$results) {
 		response(false, ["message" => "No employees found!"]);

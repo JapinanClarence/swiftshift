@@ -68,3 +68,23 @@
 	</ul>
 </nav>
 <!-- /.navbar -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<script>
+	// Check if user is logged in
+	function checkLoggedIn() {
+		const userData = JSON.parse(localStorage.getItem("user"));
+		// console.log(userData.);
+		if (!userData) {
+			// Redirect to login page if user data is not found
+			window.location.href = "login.php";
+		} else if (userData.role == 2) {
+			window.location.href = "login.php";
+		}
+	}
+
+	// Call the function on page load
+	$(document).ready(function() {
+		checkLoggedIn();
+	});
+</script>
