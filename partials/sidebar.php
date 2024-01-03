@@ -46,7 +46,7 @@
 					</ul> -->
 				</li>
 				<li class="nav-item">
-					<a href="registration.php" class="nav-link">
+					<a href="employee.php" class="nav-link">
 						<i class="nav-icon fas fa-solid fa-user"></i>
 						<p>
 							Employee Management

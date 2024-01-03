@@ -94,9 +94,6 @@ include(__DIR__ . "/partials/head.php");
   </div>
   <!-- /.content-wrapper -->
 
-  <?php
-  include(__DIR__ . "/partials/footer.php");
-  ?>
 </div>
 <!-- ./wrapper -->
 
