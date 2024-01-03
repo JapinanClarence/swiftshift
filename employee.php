@@ -124,13 +124,13 @@ include(__DIR__ . "/partials/head.php");
 				data.province;
 			const registeredDate = formatDateTime(data.created_at);
 
-			return `<tr class="align-middle border-dark">
-                    <td>${fullname}</td>
-                    <td>${data.contact_number}</td>
-                    <td>${data.email}</td>
-                    <td>${address}</td>
-                    <td>${registeredDate}</td>
-                    <td class="d-flex align-items-center">
+			return `<tr>
+                    <td class="align-middle">${fullname}</td>
+                    <td class="align-middle">${data.contact_number}</td>
+                    <td class="align-middle">${data.email}</td>
+                    <td class="align-middle">${address}</td>
+                    <td class="align-middle">${registeredDate}</td>
+                    <td class="align-middle d-flex align-items-center">
                         <a href="edit_employee.php?id=${data.id}" class="mr-2">
                             <i class="fas fa-edit"></i>
                         </a>
