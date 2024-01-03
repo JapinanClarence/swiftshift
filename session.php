@@ -47,11 +47,9 @@ include(__DIR__ . "/partials/head.php");
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
-						<form id="delete-form">
-							<tbody id="table-body">
-								<!-- table data -->
-							</tbody>
-						</form>
+						<tbody id="table-body">
+							<!-- table data -->
+						</tbody>
 					</table>
 				</div>
 			</div><!-- /.container-fluid -->
@@ -122,10 +120,10 @@ include(__DIR__ . "/partials/head.php");
 			<td class="align-middle">${formattedDate}</td>
 			<td class="align-middle">${timeInAndOut}</td>
 			<td class="align-middle">
-				<form class="update-status-form">
+				<form id="update-status-form">
 					<input type="hidden" id="id" name="id" value="${data.id}">
 					<input type="hidden" id="status" name="status" value="${data.status}">
-					<button class="${statusColor} font-weight-bold btn delete-btn" type="submit">
+					<button class="${statusColor} font-weight-bold btn delete-btn" id="submit" type="submit">
 						${statusText}
 					</button>
 				</form>
@@ -146,7 +144,7 @@ include(__DIR__ . "/partials/head.php");
 		// AJAX request to populate the table initially
 		refreshTable();
 
-		$(document).on("submit", ".update-status-form", function(e) {
+		$(document).on("submit", "#update-status-form", function(e) {
 			e.preventDefault();
 
 			const sessionId = $("#id").val();
@@ -159,7 +157,7 @@ include(__DIR__ . "/partials/head.php");
 				url: "./php/controller/admin/sessionController.php",
 				data: {
 					_method: "PATCH",
-					id: sessionId,
+					id: $(this).find('input[name="id"]').val().trim(),
 					status: newStatus,
 				},
 				success: function(res) {

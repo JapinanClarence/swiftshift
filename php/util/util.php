@@ -2,6 +2,7 @@
 
 define("HR_ROLE", "1");
 define("EMPLOYEE_ROLE", "2");
+define("ACTIVE_SESSION", 1);
 
 function dd($value)
 {
