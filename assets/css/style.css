@@ -1,0 +1,12 @@
+#image-section {
+  width: 300px;
+}
+
+@media (max-width: 700px) {
+  #login-section {
+    margin-inline: 20px;
+  }
+  #image-section {
+    width: 200px;
+  }
+}

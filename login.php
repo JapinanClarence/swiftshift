@@ -1,12 +1,12 @@
 <?php
 include(__DIR__ . "/partials/head.php");
 ?>
-<main class="vh-100 d-flex align-items-center">
+<main class="vh-100 sm d-flex align-items-center">
 	<div class="container" style="width: 500px;">
-		<div class="mx-auto" style="width: 300px;">
+		<div id="image-section" class="mx-auto">
 			<img src="assets/images/SwiftShift-Logo.jpg" style="width: 100%">
 		</div>
-		<div class="">
+		<div id="login-section">
 			<form id="login-form">
 				<!-- Email input -->
 				<div class="form-outline mb-3">
