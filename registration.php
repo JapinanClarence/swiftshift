@@ -164,10 +164,7 @@ include(__DIR__ . "/partials/head.php");
 				title: title,
 			});
 		}
-		// Error Handler
-		function handleError(err) {
-			console.log(err);
-		}
+
 	});
 </script>
 

@@ -78,10 +78,6 @@ include(__DIR__ . "/partials/head.php");
 				<div class="col-md-12">
 					<div class="d-flex justify-content-between">
 						<h4>Sessions:</h4>
-						<a class="btn btn-link mr-3 text-center font-weight-bold" style="color:#3d3d3d;" href="attendance.php">
-							<i class="fas fa-solid fa-plus mr-2"></i>
-							Attendance
-						</a>
 					</div>
 
 					<div class="table-responsive-sm rounded" style="height: 200px; overflow-y: auto;">

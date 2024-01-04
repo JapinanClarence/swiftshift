@@ -13,11 +13,22 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 switch ($requestMethod) {
 
 	case "POST": {
-			sessionTimeIn();
+
+			if (isset($_POST["_method"]) && $_POST["_method"] === "PATCH") {
+				sessionTimeOut();
+			} else {
+				sessionTimeIn();
+			}
+
 			break;
 		}
 	case "GET": {
-			fetchSessions();
+			if (isset($_GET["id"]) || !empty($_GET["id"])) {
+				fetchSessionData();
+			} else {
+				fetchSessions();
+			}
+
 			break;
 		}
 	default: {
@@ -25,6 +36,32 @@ switch ($requestMethod) {
 			response(false, ["message" => $responseMessage]);
 			break;
 		}
+}
+function fetchSessionData()
+{
+	$sessionId = $_GET["id"];
+
+	$session = Session::find($sessionId, "id");
+
+	if (!$session) {
+		response(false, ["message" => "Session not found!"]);
+		exit;
+	}
+	$attendance = Attendance::find($sessionId, "session_id");
+
+	$status = $attendance == null ? 0 : 1;
+
+	$timeIn = $attendance === null ? null :  $attendance["time_in"];
+	$timeOut = $attendance === null ? null :  $attendance["time_out"];
+
+	$returnData = [
+		"session_id" => $sessionId,
+		"date" => $session["date"],
+		"time_in" => $timeIn,
+		"time_out" => $timeOut,
+		"timeout_status" => $status
+	];
+	response(true, ["data" => $returnData]);
 }
 function fetchSessions()
 {
@@ -53,6 +90,7 @@ function fetchSessions()
 		} else {
 			$returnData[] = [
 				"session_id" => $session["id"],
+				"attendance_id" => $attendance["id"],
 				"date" => $session["date"],
 				"status" => $session["status"],
 				"user_timeIn" => $attendance["time_in"],
@@ -69,17 +107,25 @@ function sessionTimeIn()
 	$sessionId = $_POST["session_id"];
 	$timeIn = $_POST["time_in"];
 
-	$session = Session::find($sessionId, "session_id");
+	$session = Session::find($sessionId, "id");
 
 	if (!$session) {
 		response(false, ["message" => "Session not found"]);
 		exit;
 	}
+	$sessionStatus = intval($session["status"]);
 
-	if ($session["status"] !== ACTIVE_SESSION) {
+	if ($sessionStatus !== ACTIVE_SESSION) {
 		response(false, ["message" => "Session inactive, time in attempt failed"]);
 		exit;
 	}
+
+
+	// Create a DateTime object from the input string
+	$dateTime = new DateTime($timeIn);
+
+	// Format the DateTime object in the desired format
+	$formattedDateTime = $dateTime->format('Y-m-d H:i:s');
 
 	//generate id
 	$id = Ulid::generate(true);
@@ -87,12 +133,12 @@ function sessionTimeIn()
 	$result = Attendance::create([
 		"id" => $id,
 		"session_id" => $sessionId,
-		"time_in" => $timeIn,
-		"user_id" => $userId
+		"time_in" => $formattedDateTime,
+		"employee_id" => $userId
 	]);
 
 	if (!$result) {
-		response(false, ["message" => "Failed to add time in!"]);
+		response(false, ["message" => "Failed to time in!"]);
 		exit;
 	}
 
@@ -101,7 +147,7 @@ function sessionTimeIn()
 
 function sessionTimeOut()
 {
-	$sessionId = $_POST["id"];
+	$sessionId = $_POST["session_id"];
 	$timeOut = $_POST["time_out"];
 
 	$session = Session::find($sessionId, "id");
@@ -111,15 +157,25 @@ function sessionTimeOut()
 		exit;
 	}
 
-	if ($session["status"] !== ACTIVE_SESSION) {
+	$sessionStatus = intval($session["status"]);
+
+	if ($sessionStatus !== ACTIVE_SESSION) {
 		response(false, ["message" => "Session inactive, time in attempt failed"]);
 		exit;
 	}
 
-	$result = Session::update(
-		$sessionId,
+	$attendance = Attendance::find($sessionId, "session_id");
+
+	// Create a DateTime object from the input string
+	$dateTime = new DateTime($timeOut);
+
+	// Format the DateTime object in the desired format
+	$formattedDateTime = $dateTime->format('Y-m-d H:i:s');
+
+	$result = Attendance::update(
+		$attendance["id"],
 		[
-			"time_out" => $timeOut
+			"time_out" => $formattedDateTime
 		]
 	);
 

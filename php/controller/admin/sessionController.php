@@ -22,7 +22,11 @@ switch ($requestMethod) {
 			break;
 		}
 	case "GET": {
-			fetchSessions();
+			if (isset($_GET["id"]) || !empty($_GET["id"])) {
+				fetchSingleSession();
+			} else {
+				fetchSessions();
+			}
 			break;
 		}
 	default: {
@@ -30,6 +34,18 @@ switch ($requestMethod) {
 			response(false, ["message" => $responseMessage]);
 			break;
 		}
+}
+function fetchSingleSession()
+{
+	$sessionId = $_GET["id"];
+
+	$results = Session::find($sessionId, "id");
+
+	if (!$results) {
+		response(false, ["message" => "Session not found!"]);
+		exit;
+	}
+	response(true, ["data" => $results]);
 }
 function fetchSessions()
 {

@@ -106,8 +106,8 @@ include(__DIR__ . "/partials/head.php");
 
 			const sessionDate = formatDate(data.date);
 
-			const timeIn = data.user_timeIn == null ? null : convertTo12HourFormat(data.user_timeIn);
-			const timeOut = data.user_timeOut == null ? null : convertTo12HourFormat(data.user_timeOut);
+			const timeIn = data.user_timeIn == null ? null : formatDateTime(data.user_timeIn);
+			const timeOut = data.user_timeOut == null ? null : formatDateTime(data.user_timeOut);
 
 			// Dynamically set status color
 			const statusColor = data.status == 1 ? "text-success" : "text-danger";
