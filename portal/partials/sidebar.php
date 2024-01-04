@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="#" class="brand-link">
-		<img src="./assets/images/SwiftShift-Logo.jpg" alt="SwiftShift Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+		<img src="./../assets/images/SwiftShift-Logo.jpg" alt="SwiftShift Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 		<span class="brand-text font-weight-light">SwiftShift</span>
 	</a>
 
@@ -11,10 +11,10 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="./assets/images/user-profile.png" class="img-circle elevation-2" alt="User Image">
+				<img src="./../assets/images/user-profile.png" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a id="user-profile" href="#" class="d-block">Admin</a>
+				<a id="user-profile" href="profile.php" class="d-block">Admin</a>
 			</div>
 		</div>
 		<!-- Sidebar Menu -->
@@ -22,26 +22,17 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item">
 					<a href="index.php" class="nav-link">
-						<i class="nav-icon fas fa-tachometer-alt"></i>
+						<i class="nav-icon fas fa-clipboard"></i>
 						<p>
-							Dashboard
-							<!-- <i class="right fas fa-angle-left"></i> -->
+							Attendance
 						</p>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="employee.php" class="nav-link">
-						<i class="nav-icon fas fa-solid fa-user"></i>
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-solid fa-business-time"></i>
 						<p>
-							Employee Management
-						</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="session.php" class="nav-link">
-						<i class="nav-icon fas fa-solid fa-clipboard"></i>
-						<p>
-							Session Management
+							Request Leave
 						</p>
 					</a>
 				</li>
@@ -58,7 +49,7 @@
 	<!-- /.sidebar -->
 </aside>
 
-<script src="./plugins/jquery/jquery.min.js"></script>
+<script src="./../plugins/jquery/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// Get the current page URL
@@ -88,6 +79,7 @@
 		});
 
 		const username = JSON.parse(localStorage.user);
+
 		$("#user-profile").text(username.username);
 
 	});

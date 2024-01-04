@@ -90,9 +90,14 @@ include(__DIR__ . "/partials/head.php");
 	function checkLoggedIn() {
 		const userData = localStorage.getItem("user");
 		console.log(userData);
-		if (userData && userData.role == 1) {
-			// Redirect to login page if user data is not found
-			window.location.href = "index.php";
+		if (userData) {
+			if (userData.role == 1) {
+				// Redirect to login page if user data is not found
+				window.location.href = "index.php";
+			} else {
+				window.location.href = "portal/index.php";
+			}
+
 		}
 	}
 

@@ -13,7 +13,7 @@
 	<!-- Right navbar links -->
 	<ul class="navbar-nav ml-auto">
 		<!-- Navbar Search -->
-		<li class="nav-item">
+		<!-- <li class="nav-item">
 			<a class="nav-link" data-widget="navbar-search" href="#" role="button">
 				<i class="fas fa-search"></i>
 			</a>
@@ -32,8 +32,8 @@
 					</div>
 				</form>
 			</div>
-		</li>
-		<!-- Notifications Dropdown Menu -->
+		</li> -->
+		<!-- Notifications Dropdown Menu
 		<li class="nav-item dropdown">
 			<a class="nav-link" data-toggle="dropdown" href="#">
 				<i class="far fa-bell"></i>
@@ -59,7 +59,7 @@
 				<div class="dropdown-divider"></div>
 				<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
 			</div>
-		</li>
+		</li> -->
 		<li class="nav-item">
 			<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 				<i class="fas fa-expand-arrows-alt"></i>
@@ -68,7 +68,7 @@
 	</ul>
 </nav>
 <!-- /.navbar -->
-<script src="./plugins/jquery/jquery.min.js"></script>
+<script src="./../plugins/jquery/jquery.min.js"></script>
 
 <script>
 	// Check if user is logged in
@@ -78,7 +78,7 @@
 		if (!userData) {
 			// Redirect to login page if user data is not found
 			window.location.href = "login.php";
-		} else if (userData.role == 2) {
+		} else if (userData.role == 1) {
 			window.location.href = "login.php";
 		}
 	}
