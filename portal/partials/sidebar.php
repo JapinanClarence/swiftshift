@@ -29,7 +29,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link">
+					<a href="leave.php" class="nav-link">
 						<i class="nav-icon fas fa-solid fa-business-time"></i>
 						<p>
 							Request Leave
