@@ -57,7 +57,6 @@ include(__DIR__ . "/partials/head.php");
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-
 </div>
 <!-- ./wrapper -->
 
@@ -123,7 +122,7 @@ include(__DIR__ . "/partials/head.php");
 				<form id="update-status-form">
 					<input type="hidden" id="id" name="id" value="${data.id}">
 					<input type="hidden" id="status" name="status" value="${data.status}">
-					<button class="${statusColor} font-weight-bold btn delete-btn" id="submit" type="submit">
+					<button class="${statusColor} font-weight-bold btn update-btn" id="submit" type="submit">
 						${statusText}
 					</button>
 				</form>

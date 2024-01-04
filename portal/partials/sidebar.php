@@ -75,7 +75,7 @@
 			localStorage.removeItem("user");
 
 			// Redirect to the login page
-			window.location.href = "login.php";
+			window.location.href = "../login.php";
 		});
 
 		const username = JSON.parse(localStorage.user);
