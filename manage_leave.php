@@ -39,8 +39,8 @@ include(__DIR__ . "/partials/head.php");
 					</div>
 				</div>
 				<div class="mx-10 container">
-					<div class="row">
-						<div class="col-md-3">
+					<!-- <div class="row"> -->
+					<!-- <div class="col-md-3">
 							<div class="card  h-100">
 								<div class="card-body text-center">
 									<div class="mt-3 mb-4 d-flex justify-content-center align-items-center">
@@ -51,36 +51,36 @@ include(__DIR__ . "/partials/head.php");
 									<p id="address" class="text-muted mb-1 font-weight-bold">Davao Oriental</p>
 								</div>
 							</div>
+						</div> -->
+					<!-- <div class=""> -->
+					<div class="card card-primary card-outline h-100">
+						<div class="card-body box-profile">
+							<input type="hidden" id="leave_id">
+							<h3 class="profile-username text-center mb-3">Leave Request</h3>
+
+							<ul class="list-group list-group-unbordered mb-3">
+								<li class="list-group-item">
+									<b>Date Requested</b> <a id="date_requested" class="float-right"></a>
+								</li>
+								<li class="list-group-item">
+									<b>Start Date</b> <a id="start_date" class="float-right"></a>
+								</li>
+								<li class="list-group-item">
+									<b>End Date</b> <a id="end_date" class="float-right"></a>
+								</li>
+								<li class="list-group-item">
+									<b>Reason</b> <a id="reason" class="float-right"></a>
+								</li>
+
+							</ul>
+
+							<button type="submit" id="approve_response" class="btn btn-success btn-block" value="1"><b>Approve</b></button>
+							<button type="submit" id="deny_response" class="btn btn-danger btn-block" value="0"><b>Deny</b></button>
 						</div>
-						<div class=col-md-9>
-							<div class="card card-primary card-outline h-100">
-								<div class="card-body box-profile">
-									<input type="hidden" id="leave_id">
-									<h3 class="profile-username text-center mb-3">Leave Request</h3>
 
-									<ul class="list-group list-group-unbordered mb-3">
-										<li class="list-group-item">
-											<b>Date Requested</b> <a id="date_requested" class="float-right"></a>
-										</li>
-										<li class="list-group-item">
-											<b>Start Date</b> <a id="start_date" class="float-right"></a>
-										</li>
-										<li class="list-group-item">
-											<b>End Date</b> <a id="end_date" class="float-right"></a>
-										</li>
-										<li class="list-group-item">
-											<b>Reason</b> <a id="reason" class="float-right"></a>
-										</li>
-
-									</ul>
-
-									<button type="submit" id="approve_response" class="btn btn-success btn-block" value="1"><b>Approve</b></button>
-									<button type="submit" id="deny_response" class="btn btn-danger btn-block" value="0"><b>Deny</b></button>
-								</div>
-
-							</div>
-						</div>
 					</div>
+					<!-- </div> -->
+					<!-- </div> -->
 
 				</div>
 

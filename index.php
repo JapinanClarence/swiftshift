@@ -145,8 +145,10 @@ include(__DIR__ . "/partials/head.php");
               })
             }
 
+            const attendanceCount = !data.attendees_count ? 0 : data.attendees_count;
+
             $("#active_date").text(currentDate);
-            $("#attendanceCount").text(data.attendees_count);
+            $("#attendanceCount").text(attendanceCount);
             $("#employeesCount").text(data.employees_count);
             if (data.isNull) {
               $("#table-body").append(`
